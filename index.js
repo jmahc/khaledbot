@@ -1,6 +1,6 @@
 var Botkit = require("botkit");
 
-var token = process.env.SLACK_TOKEN
+var token = 'xoxb-21502111409-AzC0VjBsGmUJu7CUx6VfEVaQ';
 if (!token) {
   console.error('SLACK_TOKEN is required!')
   process.exit(1)
