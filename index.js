@@ -165,10 +165,9 @@ controller.on("direct_mention", function(bot, message) {
     replyRandomKey(bot, message);
 
   } else if ( message.text.indexOf("thanks") > -1 | message.text.indexOf("thank you") > -1 ) {
-
     var reply = "You're welcome. Bless up!"
     bot.reply(message, reply);
-
+    replyRandomThanks(bot, message);
   } else {
     var intro = personaliseIntro(message.user);
     bot.reply(message, intro);
