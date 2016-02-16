@@ -128,10 +128,6 @@ controller.on("direct_message", function(bot, message) {
     var reply = "Looks like you need help. This is what I'm here for. You can send me any messages, and I'll reply with some major :key: :key:"
     bot.reply(message, reply);
 
-  } else if (message.text.indexOf("another") > -1) {
-    var reply = "You want another one? They don't want you to have another one. Major :key: alert! :trumpet: :trumpet: :trumpet:"
-    bot.reply(message, reply);
-    replyRandomKey(bot, message);
   } else {
     var index = Math.floor(Math.random() * majorKeys.length);
     var majorKey = majorKeys[index];
@@ -209,6 +205,11 @@ controller.hears(["khaled"], ["ambient"], function(bot, message) {
 controller.hears(["dj"], ["ambient"], function(bot, message) {
   var intro = "<@"+message.user+"> DJ Khaled is the one true DJ";
   bot.reply(message, intro);
+});
+controller.hears(["another"], ["ambient"], function(bot, message) {
+  var reply = "You want another one? They don't want you to have another one. Major :key: alert! :trumpet: :trumpet: :trumpet:"
+  bot.reply(message, reply);
+  replyRandomKey(bot, message);
 });
 
 server.listen(process.env.PORT || 4444);
