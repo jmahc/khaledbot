@@ -79,6 +79,16 @@ var majorKeys = [
   "The first of the month is coming, we have to get money, we have no choice. It cost money to eat and they don't want you to eat."
 ];
 
+var majorThanks = [
+  "You're welcome! Bless up. :pray:",
+  "You're welcome! Bless up.",
+  "They don't want us to win",
+  "Lion!",
+  "We the best!",
+  "Fan luv.",
+  "Mogul talk."
+];
+
 
 
 
@@ -87,6 +97,12 @@ var replyRandomKey = function(bot, message) {
   var majorKey = majorKeys[index];
   //var majorKey = "> " + majorKeys[index];
 	bot.reply(message, majorKey);
+};
+
+var replyRandomThanks = function(bot, message) {
+	var index = Math.floor(Math.random() * majorThanks.length);
+  var majorThankYou = majorThanks[index];
+	bot.reply(message, majorThankYou);
 };
 
 
@@ -120,8 +136,9 @@ controller.on("direct_message", function(bot, message) {
 
   } else if ( message.text.indexOf("thanks") > -1 | message.text.indexOf("thank you") > -1 ) {
 
-    var reply = "You're welcome. Bless up!"
+    var reply = ""
     bot.reply(message, reply);
+    replyRandomThanks(bot, message);
 
   } else if ( message.text.indexOf("help") > -1 ) {
 
@@ -166,10 +183,9 @@ controller.on("mention", function(bot, message) {
     replyRandomKey(bot, message);
 
   } else if ( message.text.indexOf("thanks") > -1 | message.text.indexOf("thank you") > -1 ) {
-
     var reply = "You're welcome. Bless up!"
     bot.reply(message, reply);
-
+    replyRandomThanks(bot, message);
   } else {
     var intro = personaliseIntro(message.user);
     bot.reply(message, intro);
