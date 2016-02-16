@@ -80,8 +80,8 @@ var majorKeys = [
 ];
 
 var majorThanks = [
-  "You're welcome! Bless up. :pray:",
-  "You're welcome! Bless up.",
+  "You're welcome. Bless up! :pray:",
+  "You're welcome. Bless up!",
   "They don't want us to win",
   "Lion!",
   "We the best!",
@@ -165,7 +165,7 @@ controller.on("direct_mention", function(bot, message) {
     replyRandomKey(bot, message);
 
   } else if ( message.text.indexOf("thanks") > -1 | message.text.indexOf("thank you") > -1 ) {
-    var reply = "You're welcome. Bless up!"
+    var reply = ""
     bot.reply(message, reply);
     replyRandomThanks(bot, message);
   } else {
