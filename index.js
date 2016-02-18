@@ -71,7 +71,6 @@ var majorKeys = [
   "Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel.",
   "Find peace, life is like a water fall, you've gotta flow.",
   "Let's see what Chef Dee got that they don't want us to eat.",
-  "Lion!",
   "Life will have many directions. I choose to go up, way up.",
   "Surround yourself with angels.",
   "Major key, don't fall for the trap, stay focused. It's the ones closest to you that want to see you fail.",
@@ -166,6 +165,14 @@ controller.on("direct_message", function(bot, message) {
     var reply = "Looks like you need help. This is what I'm here for. You can send me any messages, and I'll reply with some major :key: :key:"
     bot.reply(message, reply);
 
+  } else if ( message.text.indexOf("smart") > -1 | message.text.indexOf("you smart") > -1 ) {
+    var reply = "No, you smart. You loyal. Bless up."
+    bot.reply(message, reply);
+
+  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("are you winning") > -1) {
+    var reply = "<@"+message.user+">, I'm always winning because I have the :key: to success."
+    bot.reply(message, reply);
+
   } else {
     var index = Math.floor(Math.random() * majorKeys.length);
     var majorKey = majorKeys[index];
@@ -189,6 +196,15 @@ controller.on("direct_mention", function(bot, message) {
     var reply = ""
     bot.reply(message, reply);
     replyRandomThanks(bot, message);
+
+  } else if ( message.text.indexOf("smart") > -1 | message.text.indexOf("you smart") > -1 ) {
+    var reply = "No, you smart. You loyal. Bless up."
+    bot.reply(message, reply);
+
+  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("are you winning") > -1) {
+    var reply = "<@"+message.user+">, I'm always winning because I have the :key: to success."
+    bot.reply(message, reply);
+
   } else {
     var intro = personaliseIntro(message.user);
     bot.reply(message, intro);
@@ -206,6 +222,7 @@ controller.on("mention", function(bot, message) {
     var reply = "You're welcome. Bless up!"
     bot.reply(message, reply);
     replyRandomThanks(bot, message);
+
   } else {
     var intro = personaliseIntro(message.user);
     bot.reply(message, intro);
