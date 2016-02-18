@@ -301,7 +301,7 @@ controller.hears(["another"], ["ambient"], function(bot, message) {
   replyRandomKey(bot, message);
 });
 
-server.listen(process.env.PORT || 4444);
+//server.listen(process.env.PORT || 4444);
 
 app.listen(app.get('port'), function() {
   console.log('We out here on port ', app.get('port'), '\n', 'Join us!!!!!!!!', '\n');
