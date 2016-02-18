@@ -1,11 +1,26 @@
-var Botkit = require("botkit"),
-    restify  = require('restify'),
-    server = restify.createServer(),
-    token = 'xoxb-21502111409-AzC0VjBsGmUJu7CUx6VfEVaQ';
+var Botkit          = require("botkit"),
+    restify         = require('restify'),
+    express         = require('express'),
+    http            = require('http'),
+    path            = require('path'),
+    server          = restify.createServer(),
+    token           = 'xoxb-21502111409-AzC0VjBsGmUJu7CUx6VfEVaQ',
+    router          = express.Router(),
+    app             = express();
+
+app.set('port', (process.env.PORT || 5000));
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname, 'views')));
+app.set('view engine', 'html');
+
+app.get('/', function(req, res) {
+  res.render('index.html')
+});
 
 if (!token) {
-  console.error('SLACK_TOKEN is required!')
-  process.exit(1)
+  console.error('SLACK_TOKEN is required!');
+  process.exit(1);
 };
 
 var controller = Botkit.slackbot({
@@ -109,7 +124,10 @@ var majorThanks = [
   "Mogul talk."
 ];
 
-
+var majorRobots = [
+  "I can think for myself.",
+  "I'm a real life mogul."
+];
 
 
 var replyRandomKey = function(bot, message) {
@@ -125,6 +143,11 @@ var replyRandomThanks = function(bot, message) {
 	bot.reply(message, majorThankYou);
 };
 
+var replyRandomRobot = function(bot, message) {
+	var index = Math.floor(Math.random() * majorRobots.length);
+  var majorRobot = majorRobots[index];
+	bot.reply(message, majorRobot);
+};
 
 var personaliseIntro = function(userID) {
 	var username = "<@"+userID+">";
@@ -169,8 +192,12 @@ controller.on("direct_message", function(bot, message) {
     var reply = "No, you smart. You loyal. Bless up."
     bot.reply(message, reply);
 
-  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("are you winning") > -1) {
+  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("you winning") > -1 | message.text.indexOf("are you winning") > -1) {
     var reply = "<@"+message.user+">, I'm always winning because I have the :key: to success."
+    bot.reply(message, reply);
+
+  } else if ( message.text.indexOf("business") > -1 | message.text.indexOf("how's business") > -1 | message.text.indexOf("how is business") > -1 | message.text.indexOf("is business") > -1) {
+    var reply = "Business is boomin'."
     bot.reply(message, reply);
 
   } else {
@@ -201,8 +228,12 @@ controller.on("direct_mention", function(bot, message) {
     var reply = "No, you smart. You loyal. Bless up."
     bot.reply(message, reply);
 
-  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("are you winning") > -1) {
+  } else if ( message.text.indexOf("have you won") > -1 | message.text.indexOf("have you ever won") > -1 | message.text.indexOf("you winning") > -1 | message.text.indexOf("are you winning") > -1) {
     var reply = "<@"+message.user+">, I'm always winning because I have the :key: to success."
+    bot.reply(message, reply);
+
+  } else if ( message.text.indexOf("business") > -1 | message.text.indexOf("how's business") > -1 | message.text.indexOf("how is business") > -1 | message.text.indexOf("is business") > -1) {
+    var reply = "Business is boomin'."
     bot.reply(message, reply);
 
   } else {
@@ -219,8 +250,8 @@ controller.on("mention", function(bot, message) {
     replyRandomKey(bot, message);
 
   } else if ( message.text.indexOf("thanks") > -1 | message.text.indexOf("thank you") > -1 ) {
-    var reply = "You're welcome. Bless up!"
-    bot.reply(message, reply);
+    // var reply = "You're welcome. Bless up!"
+    // bot.reply(message, reply);
     replyRandomThanks(bot, message);
 
   } else {
@@ -259,6 +290,11 @@ controller.hears(["dj"], ["ambient"], function(bot, message) {
   var intro = "<@"+message.user+"> DJ Khaled is the one true DJ";
   bot.reply(message, intro);
 });
+controller.hears(["terminator"], ["skynet"], ["ai"], ["smarter"], ["robot"], ["ambient"], function(bot, message) {
+  // var intro = "<@"+message.user+"> DJ Khaled is the one true DJ";
+  // bot.reply(message, intro);
+  replyRandomRobot(bot, message);
+});
 controller.hears(["another"], ["ambient"], function(bot, message) {
   var reply = "You want another one? They don't want you to have another one. Major :key: alert! :trumpet: :trumpet: :trumpet:"
   bot.reply(message, reply);
@@ -266,3 +302,7 @@ controller.hears(["another"], ["ambient"], function(bot, message) {
 });
 
 server.listen(process.env.PORT || 4444);
+
+app.listen(app.get('port'), function() {
+  console.log('We out here on port ', app.get('port'), '\n', 'Join us!!!!!!!!', '\n');
+}).listen(5000);

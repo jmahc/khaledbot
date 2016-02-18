@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "botkit": "0.0.5",
-    "restify": "^2.6.2"
+    "restify": "^2.6.2",
+    "express": "^4.13.3"
   },
   "engines": {
     "node": "4.2.3"
