@@ -4,7 +4,7 @@ var Botkit          = require("botkit"),
     http            = require('http'),
     path            = require('path'),
     server          = restify.createServer(),
-    token           = 'xoxb-21502111409-AzC0VjBsGmUJu7CUx6VfEVaQ',
+    token           = 'xoxb-66271368757-UO95mn4Cf0LynO2U9MDmXmfc',
     router          = express.Router(),
     app             = express();
 
@@ -157,7 +157,8 @@ var personaliseIntro = function(userID) {
 		"Hold up "+username+"! Major :key: for you",
 		""+username+", you're in need of a major :key:",
 		""+username+" listen up! Major :key: alert",
-		"Wait wait wait. "+username+", major :key: for you"
+		"Wait wait wait. "+username+", major :key: for you",
+        ""+username+" - you're gonna need to take a seat for this one.  Major :key: alert!"
 	]
 	var index = Math.floor(Math.random() * intros.length);
 	return intros[index];
